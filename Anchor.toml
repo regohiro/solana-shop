@@ -2,6 +2,8 @@
 seeds = false
 [programs.localnet]
 solana_shop = "ShoPVoCg1wWKuNnMxqekeHfvfNkUBjAyUPbtL1AoFAP"
+[programs.devnet]
+solana_shop = "5VggK8ZBCDGCRQ9PruBwfTr6u6RweXKxHJpkEcrqk5W7"
 
 [registry]
 url = "https://anchor.projectserum.com"

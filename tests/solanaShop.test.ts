@@ -1,6 +1,12 @@
 import * as anchor from "@project-serum/anchor";
 import { Program, Provider, BN } from "@project-serum/anchor";
-import { PublicKey, Secp256k1Program, SystemProgram, SYSVAR_INSTRUCTIONS_PUBKEY, Transaction } from "@solana/web3.js";
+import {
+  PublicKey,
+  Secp256k1Program,
+  SystemProgram,
+  SYSVAR_INSTRUCTIONS_PUBKEY,
+  Transaction,
+} from "@solana/web3.js";
 import { SolanaShop } from "../target/types/solana_shop";
 import { getKeypairs, getShopClients, getSignerKey, getWallets } from "./utils";
 import { expect } from "./chai-setup";
@@ -101,7 +107,7 @@ describe("Solana Shop 🛒", () => {
     it("Mints 10 payment token to customer", async () => {
       const customerToken = await token.getOrCreateAssociatedAccountInfo(customerKeypair.publicKey);
       const amount = new u64(10 * 10 ** 9);
-      await token.mintTo(customerToken.address, ownerKeypair, [],  amount);
+      await token.mintTo(customerToken.address, ownerKeypair, [], amount);
     });
 
     it("Opens shop", async () => {
@@ -212,14 +218,16 @@ describe("Solana Shop 🛒", () => {
             ethAddress: singer.ethAddress,
             message,
             signature,
-            recoveryId: recid
-          })
+            recoveryId: recid,
+          }),
         ],
       });
 
       const shop = await program.account.shop.fetch(shopPDA);
       const item = await program.account.item.fetch(itemPDA);
-      const customerItemAfter = await mint.getOrCreateAssociatedAccountInfo(customerKeypair.publicKey); 
+      const customerItemAfter = await mint.getOrCreateAssociatedAccountInfo(
+        customerKeypair.publicKey,
+      );
 
       expect(shop.nonce.toNumber()).to.eq(1);
       expect(item.sold).to.eq(2);

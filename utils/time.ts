@@ -1,0 +1,1 @@
+export const delay = (ms: number): Promise<PromiseConstructor> => new Promise(resolve => setTimeout(resolve, ms));

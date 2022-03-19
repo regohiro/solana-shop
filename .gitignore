@@ -3,7 +3,6 @@
 target
 **/*.rs.bk
 node_modules
-scripts
 account/
 !account/token-mint-authority.json
 test-ledger

@@ -1,6 +1,11 @@
 use anchor_lang::prelude::*;
 
 #[event]
+pub struct InitAdminEvent {
+  pub admin: Pubkey
+}
+
+#[event]
 pub struct OpenShopEvent {
   pub shop: Pubkey,
   pub authority: Pubkey,
@@ -11,6 +16,7 @@ pub struct OpenShopEvent {
 #[event]
 pub struct ListItemEvent {
   pub item: Pubkey,
+  pub shop: Pubkey,
   pub mint: Pubkey,
   pub price: u64,
   pub supply: u32,

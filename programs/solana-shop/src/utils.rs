@@ -13,15 +13,15 @@ pub fn has_verified_signature(
   nonce: u64,
 ) -> Result<()> {
   //Get current instruction (buy_item) index
-  let current_id_index = sysvar::instructions::load_current_index_checked(ix_account)?;
+  let current_ix_index = sysvar::instructions::load_current_index_checked(ix_account)?;
 
   //The current instruction mustn't be the very first instruction
-  if current_id_index == 0 {
+  if current_ix_index == 0 {
     return Err(ErrorCodes::InstructionAtWrongIndex.into());
   }
 
   //Get previous instruction and check if the instruction is for the secp256k1 program
-  let secp_ix_index = (current_id_index - 1) as u8;
+  let secp_ix_index = (current_ix_index - 1) as u8;
   let secp_ix = sysvar::instructions::load_instruction_at_checked(secp_ix_index.into(), ix_account)
     .map_err(|_| ProgramError::InvalidAccountData)?;
   if secp_ix.program_id != solana_program::secp256k1_program::id() {

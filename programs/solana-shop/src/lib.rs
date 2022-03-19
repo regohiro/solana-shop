@@ -24,6 +24,10 @@ pub mod solana_shop {
     admin.authority = ctx.accounts.authority.key();
     admin.bump = *ctx.bumps.get("admin").unwrap();
 
+    emit!(InitAdminEvent {
+      admin: admin.authority
+    });
+
     Ok(())
   }
 
@@ -60,6 +64,7 @@ pub mod solana_shop {
     item.sold = 0;
 
     emit!(ListItemEvent {
+      shop: item.shop,
       item: item.key(),
       mint: item.mint,
       price: item.price,
